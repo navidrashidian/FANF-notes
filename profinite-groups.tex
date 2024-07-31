@@ -1,5 +1,6 @@
 \documentclass[12pt]{article}
 
+\usepackage{tikz-cd}
 \usepackage{amsmath,amssymb,amsfonts,amsthm}
 
 \newtheorem{thm}{Theorem}[section]
@@ -8,9 +9,15 @@
 \newtheorem{dfn}[thm]{Definition}
 \newtheorem{exm}[thm]{Example}
 
-\newcommand{\CC}{\mathcal{C}}
-\newcommand{\DD}{\mathcal{D}}
-\newcommand{\PP}{\mathcal{P}}
+\theoremstyle{remark}
+\newtheorem{rem}[thm]{Remark}
+
+\newcommand{\catvar}[1]{\mathcal{#1}}
+\newcommand{\CC}{\catvar{C}}
+\newcommand{\DD}{\catvar{D}}
+\newcommand{\PP}{\catvar{P}}
+\newcommand{\II}{\catvar{I}}
+\newcommand{\JJ}{\catvar{J}}
 
 \newcommand{\catname}[1]{\textup{\sffamily\textbf{#1}}}
 \newcommand*{\Set}{\catname{Set}}
@@ -30,54 +37,119 @@
 
 \begin{document}
 
-\maketitle
+    \maketitle
 
-\section{Category Theory}
+    \section{Category Theory}
 
-\begin{dfn}
-    A \emph{category} $\mathcal{C}$ consists of collections $\Obj{\CC}$ and $\Mor{\CC}$, respectively called the objects and morphisms of $\CC$ such that
-    \begin{itemize}
-        \item there are functions $s\colon\Mor{\CC}\to\Obj{\CC}$ and $t\colon\Mor{\CC}\to\Obj{\CC}$  assigning to each morphism a source and a target;
-        \item for each object $X\in\Obj{\CC}$ there is a distinguished morphism $\textup{id}_X\Obj{\CC}$ such that $s(\textup{id}_X)=t(\textup{id}_X)=X$; and
-        \item for each pair of morphisms $f,g$ such that $t(f)=s(f)$ there is a morphism $g\circ f$ with $s(g\circ f)=s(f)$ and $t(g\circ f)=t(g)$ called their composition;
-    \end{itemize}
-    satisfying the further conditions that $(f\circ g)\circ h=f\circ(g\circ h)$ and $\textup{id}_X\circ f=f$ and $f\circ\textup{id}_X=f$ wherever these expressions make sense.
-\end{dfn}
+    \begin{dfn}
+        A \emph{category} $\mathcal{C}$ consists of collections $\Obj{\CC}$ and $\Mor{\CC}$, respectively called the objects and morphisms of $\CC$ such that
+        \begin{itemize}
+            \item there are functions $s\colon\Mor{\CC}\to\Obj{\CC}$ and $t\colon\Mor{\CC}\to\Obj{\CC}$  assigning to each morphism a source and a target;
+            \item for each object $X\in\Obj{\CC}$ there is a distinguished morphism $\textup{id}_X\in\Mor{\CC}$ such that $s(\textup{id}_X)=t(\textup{id}_X)=X$; and
+            \item for each pair of morphisms $f,g$ such that $t(f)=s(f)$ there is a morphism $g\circ f$ with $s(g\circ f)=s(f)$ and $t(g\circ f)=t(g)$ called their composition;
+        \end{itemize}
+        satisfying the further conditions that $(f\circ g)\circ h=f\circ(g\circ h)$ and $\textup{id}_X\circ f=f$ and $f\circ\textup{id}_X=f$ wherever these expressions make sense.
+    \end{dfn}
 
-\begin{dfn}
-    Let $\CC$ be a category. If both $\Obj{\CC}$ and $\Mor{\CC}$ are sets, The category $\CC$ is called a \emph{small category}. $\CC$ is called \emph{locally small} if for every objects $X,Y\in\Obj{\CC}$ the collection of morphisms $f\in\Mor{\CC}$ with $s(f)=X$ and $t(f)=Y$ is a set. In a locally small category for objects $X,Y\in\Obj{\CC}$ we define the \emph{hom-set of $X$ and $Y$} as
-    $$
-        \textup{Hom}_\CC(X,Y)=\{f\in\Mor{\CC}:s(f)=X\ \textup{and}\ t(f)=Y\}
-    $$
-\end{dfn}
+    \begin{rem}
+        We write $f\colon X\to Y$ to denote a morphism $f\in\Mor{\CC}$ with $s(f)=X$ and $t(f)=Y$.
+    \end{rem}
 
-\begin{dfn}
-    Let $\CC$ and $\DD$ be categories. A \emph{(covariant) functor} $F\colon\CC\to\DD$ consists of maps $\Obj{\CC}\to\Obj{\DD}$ and $\Mor{\CC}\to\Mor{\DD}$ such that
-    \begin{itemize}
-        \item for every $f\in\Mor{\CC}$ we have $s(F(f))=F(s(f))$ and $t(F(f))=F(t(f))$;
-        \item for every $X\in\Obj{\CC}$ we have $F(\textup{id}_X)=\textup{id}_F(X)$; and
-        \item for every pair of morphisms $f,g\in\Mor{\CC}$ with a defined composition $F(g\circ f)=F(g)\circ F(f)$.
-    \end{itemize}
-\end{dfn}
+    \begin{dfn}
+        Let $\CC$ be a category. If both $\Obj{\CC}$ and $\Mor{\CC}$ are sets, The category $\CC$ is called a \emph{small category}. $\CC$ is called \emph{locally small} if for every objects $X,Y\in\Obj{\CC}$ the collection of morphisms $f\in\Mor{\CC}$ with $s(f)=X$ and $t(f)=Y$ is a set. In a locally small category for objects $X,Y\in\Obj{\CC}$ we define the \emph{hom-set of $X$ and $Y$} as
+        $$
+            \textup{Hom}_\CC(X,Y)=\{f\in\Mor{\CC}:s(f)=X\ \textup{and}\ t(f)=Y\}
+        $$
+    \end{dfn}
 
-\begin{dfn}
-    Suppose $\CC$ is a category. The \emph{opposite category} denoted by $\CC^{\textup{op}}$ is the category with the same objects and morphisms as $\CC$ such that $s_{\CC^{\textup{op}}}(f)=t_{\CC}(f)$ and $t_{\CC^{\textup{op}}}(f)=s_{\CC}(f)$ and $g\circ_{\CC^\textup{op}} f=f\circ_\CC g$.
-\end{dfn}
+    \begin{dfn}
+        Let $\CC$ and $\DD$ be categories. A \emph{(covariant) functor} $F\colon\CC\to\DD$ consists of maps $\Obj{\CC}\to\Obj{\DD}$ and $\Mor{\CC}\to\Mor{\DD}$ such that
+        \begin{itemize}
+            \item for every $f\in\Mor{\CC}$ we have $s(F(f))=F(s(f))$ and $t(F(f))=F(t(f))$;
+            \item for every $X\in\Obj{\CC}$ we have $F(\textup{id}_X)=\textup{id}_F(X)$; and
+            \item for every pair of morphisms $f,g\in\Mor{\CC}$ with a defined composition $F(g\circ f)=F(g)\circ F(f)$.
+        \end{itemize}
+    \end{dfn}
 
-\begin{dfn}
-    A \emph{contravariant function} $F\colon\CC\to\DD$ is a covariant functor $F\colon\CC^\textup{op}\to\DD$.
-\end{dfn}
+    \begin{dfn}
+        Suppose $\CC$ is a category. The \emph{opposite category} denoted by $\CC^{\textup{op}}$ is the category with the same objects and morphisms as $\CC$ such that $s_{\CC^{\textup{op}}}(f)=t_{\CC}(f)$ and $t_{\CC^{\textup{op}}}(f)=s_{\CC}(f)$ and $g\circ_{\CC^\textup{op}} f=f\circ_\CC g$.
+    \end{dfn}
 
-\begin{exm}
-    A \emph{preorder} is a small categoy $\PP$ such that for every objects $X,Y\in\Obj{\PP}$ we have $\#\textup{Hom}_\PP(X,Y)\leq1$.
-\end{exm}
+    \begin{dfn}
+        A \emph{contravariant function} $F\colon\CC\to\DD$ is a covariant functor $F\colon\CC^\textup{op}\to\DD$.
+    \end{dfn}
 
-\begin{exm}
-    A \emph{partially ordered set (poset)} is a small categoy $\PP$ such that for every objects $X,Y\in\Obj{\PP}$ we have $\#\big(\textup{Hom}_\PP(X,Y)\cup\textup{Hom}_\PP(Y,X)\big)\leq\nolinebreak1$. For posets $\PP_1$ and $\PP_2$ an order-preserving (-reversing) function from $\PP_1$ to $\PP_2$ is exactly a covariant (contravariant) functor $F\colon\PP_1\to\PP_2$.
-\end{exm}
+    \begin{exm}
+        A \emph{preorder} is a small categoy $\PP$ such that for every objects $X,Y\in\Obj{\PP}$ we have $\#\textup{Hom}_\PP(X,Y)\leq1$. If for every $X,Y\in\Obj{\PP}$ there is an object $Z\in\Obj{\PP}$ with morphisms $f\colon X\to Z$ and $g\colon Y\to Z$, the preorder $\PP$ is called a \emph{directed set}.
+    \end{exm}
 
-\begin{exm}
-    Sets and functions constitute a category denoted by $\Set$. Groups and group homomorphisms constitute a category denoted by $\Grp$. Topological spaces and continuous functions constitute a category denoted by $\Top$.
-\end{exm}
+    \begin{exm}
+        A \emph{partially ordered set (poset)} is a small categoy $\PP$ such that for every pair of objects $X,Y\in\Obj{\PP}$ we have $$\#\big(\textup{Hom}_\PP(X,Y)\cup\textup{Hom}_\PP(Y,X)\big)\leq1$$. For posets $\PP_1$ and $\PP_2$ an order-preserving (-reversing) function from $\PP_1$ to $\PP_2$ is exactly a covariant (contravariant) functor $F\colon\PP_1\to\PP_2$.
+    \end{exm}
+
+    \begin{exm}
+        Sets and functions constitute a category denoted by $\Set$. Groups and group homomorphisms constitute a category denoted by $\Grp$. Topological spaces and continuous functions constitute a category denoted by $\Top$. All of these categories are locally small but none is small.
+    \end{exm}
+
+    \begin{exm}
+        The category $\catname{2}$ is the category consisting of two objects and only the required identity morphisms:
+            \[\begin{tikzcd}
+                \bullet && \bullet
+            \end{tikzcd}\]
+    \end{exm}
+
+    \begin{exm}\label{exm:pod}
+        The following diagram describes a category consisting of three objects and two morphisms (in addition to the required identity morphisms):
+        \[\begin{tikzcd}
+            && \bullet \\
+            \\
+            \bullet && \bullet
+            \arrow[from=1-3, to=3-3]
+            \arrow[from=3-1, to=3-3]
+        \end{tikzcd}\]
+        Call this category $\catvar{J}$. A functor $F\colon \JJ\to\CC$ describes a diagram of the following shape in the category $\CC$:
+        \[\begin{tikzcd}
+            && X \\
+            \\
+            Y && Z
+            \arrow["f", from=1-3, to=3-3]
+            \arrow["g", from=3-1, to=3-3]
+        \end{tikzcd}\]
+        This justifies us calling a functor from a small category a diagram.
+    \end{exm}
+
+    \begin{dfn}
+        Let $F\colon\JJ\to\CC$ be a diagram. A \emph{cone} over $F$ is a an object $X\in\Obj{\CC}$ and a collection of morphisms $\alpha_J\colon X\to F(J)$ indexed by objects $J\in\Obj{\JJ}$ such that for every morphism $f\colon J\to J'$ we have $F(f)\circ \alpha_{J}=\alpha_{J'}$.
+    \end{dfn}
+
+    \begin{exm}
+        A diagram $F\colon\catname{2}\to\CC$ is just a pair of discrete objects $X,Y\in\Obj{\CC}$. A cone over $F$ is just an object $A\in\Obj{\CC}$ and a pair of morphisms $f\colon A\to X$ and $g\colon A\to Y$.
+    \end{exm}
+    
+    \begin{exm}
+        Recall the category $\JJ$ from example \ref{exm:pod}. A cone over $F:\JJ\to\CC$ is fully described by an object $A\in\Obj{\CC}$ and morphisms $\alpha\colon A\to X$ and $\beta\colon A\to Y$ such that the following diagram commutes:
+        \[\begin{tikzcd}
+            A && X \\
+            \\
+            Y && Z
+            \arrow["\alpha", from=1-1, to=1-3]
+            \arrow["\beta", from=1-1, to=3-1]
+            \arrow["f", from=1-3, to=3-3]
+            \arrow["g", from=3-1, to=3-3]
+        \end{tikzcd}\]
+        (Note that we don't need to explicitly describe the morphism $A\to Z$ included in the cone.)
+    \end{exm}
+
+    \begin{dfn}
+        Let $F\colon\JJ\to\CC$ be a diagram. A \emph{limit of $F$} is a cone $\langle L,\alpha_J\rangle$ over $F$ such that for every cone $\langle N,\beta_J\rangle$ over $F$ there is a unique morphism $u\colon N\to L$ such that for every $J\in\Obj{\JJ}$ we have $\beta_J=\alpha_J\circ u$.
+    \end{dfn}
+
+    \begin{exm}
+        Consider a diagram $F\colon\catname{2}\to\Set$ consisting of sets $X$ and $Y$. It is easy to verify that the cartesian product $X\times Y$ is a limit of $F$. The same is true if we replace $\catname{2}$ with another discrete category with the requisite cardinality serving as an index set.
+    \end{exm}
+
+    \begin{exm}
+        Let $\II$ be a discrete category serving us an index set. A functor $F\colon\II\to\Top$ is a family $\langle X_I\rangle$ of toplogical spaces indexed by $\II$. It is easy to verify that the cartesian product $\prod X_I$ equipped with the product topology is a limit of $F$ but $\prod X_I$ equipped with the box topology is in general not. (See Wikipedia: Box Topology.)
+    \end{exm}
 
 \end{document} 
