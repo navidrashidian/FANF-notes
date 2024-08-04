@@ -1,9 +1,16 @@
 \documentclass[12pt]{article}
 
-\usepackage{tikz-cd}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+
+\usepackage[backend=bibtex,style=numeric]{biblatex}
+
 \usepackage{amsmath,amssymb,amsfonts,amsthm}
 
+\usepackage{tikz-cd}
+
 \newtheorem{thm}{Theorem}[section]
+\newtheorem{prop}[thm]{Proposition}
 
 \theoremstyle{definition}
 \newtheorem{dfn}[thm]{Definition}
@@ -23,13 +30,14 @@
 \newcommand*{\Set}{\catname{Set}}
 \newcommand*{\Grp}{\catname{Grp}}
 \newcommand*{\Top}{\catname{Top}}
+\newcommand*{\TopGrp}{\catname{TopGrp}}
 
 
 \newcommand{\Obj}[1]{\textup{Obj}(#1)}
 \newcommand{\Mor}[1]{\textup{Mor}(#1)}
 \newcommand{\Hom}[2]{\textup{Hom}(#1,#2)}
 
-
+\addbibresource{profinite-groups.bib}
 
 \title{Profinite Groups}
 \author{Navid Rashidian}
@@ -63,6 +71,10 @@
     \end{dfn}
 
     \begin{dfn}
+        Let $\CC$ be a category and $f\colon X\to Y$ a morphism in $\CC$. We call $f$ an \emph{isomorphism} if there is a morphism $g\colon Y\to X$ such that $g\circ f=\textup{id}_X$ and $f\circ g=\textup{id}_Y$. If such morphisms exist, we call $X$ and $Y$ \emph{isomorphic}.
+    \end{dfn}
+
+    \begin{dfn}
         Let $\CC$ and $\DD$ be categories. A \emph{(covariant) functor} $F\colon\CC\to\DD$ consists of maps $\Obj{\CC}\to\Obj{\DD}$ and $\Mor{\CC}\to\Mor{\DD}$ such that
         \begin{itemize}
             \item for every $f\in\Mor{\CC}$ we have $s(F(f))=F(s(f))$ and $t(F(f))=F(t(f))$;
@@ -80,7 +92,7 @@
     \end{dfn}
 
     \begin{exm}
-        A \emph{preorder} is a small categoy $\PP$ such that for every objects $X,Y\in\Obj{\PP}$ we have $\#\textup{Hom}_\PP(X,Y)\leq1$. If for every $X,Y\in\Obj{\PP}$ there is an object $Z\in\Obj{\PP}$ with morphisms $f\colon X\to Z$ and $g\colon Y\to Z$, the preorder $\PP$ is called a \emph{directed set}.
+        A \emph{preorder} is a small categoy $\PP$ such that for every objects $X,Y\in\Obj{\PP}$ we have $\#\textup{Hom}_\PP(X,Y)\leq1$. If for every $X,Y\in\Obj{\PP}$ there is an object $Z\in\Obj{\PP}$ with morphisms $f\colon X\to Z$ and $g\colon Y\to Z$, the preorder $\PP$ is called a \emph{directed set}. For $I,J\in\Obj{\PP}$ we write $I\leq J$ if $\#\textup{Hom}_\PP(X,Y)=1$.
     \end{exm}
 
     \begin{exm}
@@ -88,7 +100,7 @@
     \end{exm}
 
     \begin{exm}
-        Sets and functions constitute a category denoted by $\Set$. Groups and group homomorphisms constitute a category denoted by $\Grp$. Topological spaces and continuous functions constitute a category denoted by $\Top$. All of these categories are locally small but none is small.
+        Sets and functions constitute a category denoted by $\Set$. Groups and group homomorphisms constitute a category denoted by $\Grp$. Topological spaces and continuous functions constitute a category denoted by $\Top$. Topological groups and continuous homomorphisms constitute a category denoted by $\TopGrp$. All of these categories are locally small but none is small.
     \end{exm}
 
     \begin{exm}
@@ -96,6 +108,7 @@
             \[\begin{tikzcd}
                 \bullet && \bullet
             \end{tikzcd}\]
+        A funtor $F\colon\catname{2}\to\CC$ is just a pair of objects from $\Obj{\CC}$. Similarly, for every cardinality $\kappa$ we can define a discrete category with cardinality $\kappa$ to serve as an index set.
     \end{exm}
 
     \begin{exm}\label{exm:pod}
@@ -144,16 +157,123 @@
         Let $F\colon\JJ\to\CC$ be a diagram. A \emph{limit of $F$} is a cone $\langle L,\alpha_J\rangle$ over $F$ such that for every cone $\langle N,\beta_J\rangle$ over $F$ there is a unique morphism $u\colon N\to L$ such that for every $J\in\Obj{\JJ}$ we have $\beta_J=\alpha_J\circ u$.
     \end{dfn}
 
+    \begin{rem}
+        Let $\langle L,\alpha_J\rangle$ and $\langle L',\beta_J\rangle$ be limits of $F:\JJ\to\CC$. By definition there are morphisms $u\colon L'\to L$ and $u'\colon L\to L'$ such that for every $J\in\Obj{\JJ}$ we have $\beta_J=\alpha_J\circ u$ and $\alpha_J=\beta_J\circ u'$. It follows that for every $J\in\Obj{\JJ}$ we have $\alpha_J=\alpha_J\circ(u\circ u')$. According to the definition of limit only one function should play such role, so $u\circ u'=\textup{id}_L$ and similarly $u'\circ u=\textup{id}_{L'}$. Therefore $L$ and $L'$ are isomorphic. As a folk who have internalized Leibniz's principle of the Identity of Indiscernibles, this makes us usually talk about \emph{the} limit of a diagram.
+    \end{rem}
+
     \begin{exm}
-        Consider a diagram $F\colon\catname{2}\to\Set$ consisting of sets $X$ and $Y$. It is easy to verify that the cartesian product $X\times Y$ is a limit of $F$. The same is true if we replace $\catname{2}$ with another discrete category with the requisite cardinality serving as an index set.
+        Consider a diagram $F\colon\catname{2}\to\Set$ consisting of sets $X$ and $Y$. It is easy to verify that the cartesian product $X\times Y$ with the obvious projection maps $\pi_X$ and $\pi_Y$ is a limit of $F$. The same is true if we replace $\catname{2}$ with another discrete category with the requisite cardinality serving as an index set.
     \end{exm}
 
     \begin{exm}
-        Let $\II$ be a discrete category serving us an index set. A functor $F\colon\II\to\Top$ is a family $\langle X_I\rangle$ of toplogical spaces indexed by $\II$. It is easy to verify that the cartesian product $\prod X_I$ equipped with the product topology is a limit of $F$ but $\prod X_I$ equipped with the box topology is in general not. (See Wikipedia: Box Topology.)
+        Let $\II$ be a discrete category serving us an index set. A functor $F\colon\II\to\Top$ is a family $\big\langle\langle X_I,\tau_I\rangle\big\rangle$ of toplogical spaces indexed by $\II$. Let $X=\langle\prod X_I,\tau\rangle$ and the obvious projection mappings $\pi_{X_I}$ the cartesian product of the $X_I$'s with the usual product topology having the collection of all $(\pi_{X_I})^{-1}(U)$'s for some $U\in\tau_I$ as a subbasis. Since continuous maps are set maps it is obvious that for any given cone $\langle Y,\alpha_{X_I}\rangle$ there is only one possible candidate defined by $u\colon y\mapsto (\alpha_{X_I}(y))$ as the required morphism $Y\to X$. Hence, we only need to show that $u$ is continuous if the $\alpha_{X_I}$'s are. This last fact is obvious since every elements of the subbasis according to which $\tau$ is defined is in the form of $(\pi_{X_I})^{-1}(U)$ and $u^{-1}((\pi_{X_I})^{-1}(U))=(\alpha_I)^{-1}(U)$ which is gauranteed to be open if $\alpha_I$ is continuous.
+
+        If we instead equip $\prod X_I$ with the box topology generated by sets in the form of $\prod U_I$ such that every $U_I$ is a member of $\tau_I$, the map $y\mapsto (\alpha_{X_I}(y))$ will not be necessarily continuous. Moreover the cartesian product of compact topological spaces equipped with the box topology is not necessarily compact, while their cartesian product equipped with the product topology is necessarily so. (See Wikipedia: Box Topology.)
+    \end{exm}
+
+    \section{Projective Systems and Projective Limits}
+
+    \begin{dfn}
+        Let $\II$ be a preordered set. A contravariant functor $F\colon\II\to\CC$ is called a \emph{projective} (or \emph{inverse}) \emph{system}.
+    \end{dfn}
+
+    \begin{rem}
+         Since in a preorder there is at most one morphism between any two objects, in a given projective system we could denote the possible morphism $X_J\to X_I$ as $\varphi_{IJ}$ without ambiquity (note the difference in order). We will usually denote a projective system by $\langle X_I,\varphi_{IJ}\rangle$. We will also usually call describe the family of maps in a cone on $F$ as a family of maps compatible with the projective system.
+    \end{rem}
+
+    \begin{dfn}
+        Let $F\colon \II\to\CC$ be a projective system. The limit of $F$ is called the \emph{projective limit} or \emph{inverse limit} of this system and is denoted by $\varprojlim X_I$.
+    \end{dfn}
+
+    \begin{exm}
+        In the category $\Set$ for a given projective system $\langle X_I,\varphi_{IJ}\rangle$ the following explicit construction equipped with the obvious projection maps $\pi_I$ describes a projective limit:
+        $$
+            \varprojlim X_I = \{(x_I)\in\prod X_I : \varphi_{IJ}(x_J)=x_I\ \textup{for every}\ I,J\in\Obj{\II}\}
+        $$
+        For a family of maps $\varphi_I\colon Y\to X_I$ compatible with the projective system, the map $x\mapsto (\varphi_I(x))$ is clearly the unique map $H\to\varprojlim X_I$ described in the definition of limit. The fac that $(\varphi_I(x))$ falls inside $\varprojlim X_I$ is gauranteed by the compatibility of the set of maps with the projective system.
+    \end{exm}
+
+    \begin{exm}\label{exm:emp}
+        Consider the following projective system in $\Set$:
+        \[\begin{tikzcd}
+            && {\{0\}} \\
+            \\
+            {\{1\}} && {\{0,1\}}
+            \arrow[hook, from=1-3, to=3-3]
+            \arrow[hook, from=3-1, to=3-3]
+        \end{tikzcd}\]
+        This projective system is modelled on a preordered set that is not directed. It is easy to verify that its limit is empty.
     \end{exm}
 
     \begin{exm}
-        This is an example.
+        Let $\langle G_I,\varphi_{IJ}\rangle$ be a projective system in the category $\Grp$. Let
+        $$
+             G = \{(x_I)\in\prod G_I : \varphi_{IJ}(x_J)=x_I\ \textup{for every}\ I,J\in\Obj{\II}\}
+        $$
+        and $\pi_I$'s the obvious projection maps. The identity element of $\prod G_I$ is clearly in $G$ and hence $G$ is necessarily non-empty. Also it is easy to verify that $G$ is a group. Finally, for every group $H$ and set of morphisms $\psi_I\colon H\to G_I$ we have, the map $u\colon H\to G$ defined by $x\mapsto (\psi_I(x))$ is the sole group homomorphism satisfying the desired property in the definition of projective limits. Hence, $\varprojlim G_I=G$. 
     \end{exm}
+
+    We saw in Example \ref{exm:emp} that the projective limit of a projective system need not be non-empty. The following theorem gives us sufficient conditions for having a non-empty projective limit of finite sets:
+    
+    \begin{prop}
+        Let $\II$ be a directed set and $\langle X_i,\varphi_{IJ}\rangle$ a projective system modelled on $\II$. Let $X=\varprojlim X_I$. Then
+        \begin{enumerate}[label=(\roman*)]
+            \item If all $X_I$'s are non-empty, then $X$ is non-empty.
+            \item For each $I\in\Obj{\II}$ we have
+            $$ \pi_I(X) =\bigcap_{I\leq J}\varphi_{IJ}(X_J) $$
+        \end{enumerate}
+    \end{prop}
+
+    \begin{proof}
+        See \cite[Proposition 1-11]{FANF1999}.
+    \end{proof}
+
+    \section{Profinite Groups}
+
+    \begin{dfn}
+        A topological group $G$ is called a \emph{profinite group} if there is a projective system $\langle G_I,\varphi_{IJ}\rangle$ such that $G$ is the projective limit of this projective system in the category $\catname{TopGrp}$. The topology on $G$ is called the \emph{profinite topology}.
+    \end{dfn}
+
+    \begin{prop}
+        Let $G$ be a profinite group, given as a limit of the projective system $\langle G_I,\varphi_{IJ}\rangle$. Then,
+        \begin{enumerate}[label=(\alph*)]
+            \item $G$ is Hausdorff;
+            \item $G$ is a closed subset of the direct product $\prod G_I$; and
+            \item $G$ is compact.
+        \end{enumerate}
+    \end{prop}
+    \begin{proof}
+        \begin{enumerate}[label=(\alph*)]
+            \item The direct product of Hausdorff spaces is Hausdorff. Hence, $G$ is Hausdorff.
+            \item % complete
+            \item The direct product $\prod G_I$ is compact. A closed subset of a compact space equipped with the subspace topology is compact.
+        \end{enumerate}
+    \end{proof}
+
+    \subsection{$p$-adic Numbers}
+
+    \begin{dfn}
+        Let $G$ be a topological group. A \emph{Cauchy sequence} in $G$ is a sequence $(x_i)$ of elements of $G$ such that, for any neighborhood $U$ of $0$, there is a positive integer $N$ such that for every $m,n\geq N$ we have $x_m-x_n\in U$. Two Cauchy sequences $(x_i)$ and $(y_i)$ are \emph{equivalent} if $x_i-y_i\to 0$ in $G$.
+    \end{dfn}
+
+    \begin{prop}
+        \begin{enumerate}[label=(\alph*)]
+            \item The equivalence defined on Cauchy sequences is an equivalence relation.
+            \item Sum of two Cauchy sequences is Cauchy.
+            \item Suppose $(x_i)\sim(y_i)$ and $(x'_i)\sim(y'_i)$. Then $(x_i+x'_i)\sim(y_i+y'_i)$.
+        \end{enumerate}
+    \end{prop}
+    
+    \begin{proof}
+        \begin{enumerate}[label=(\alph*)]
+            \item Reflexivity is trivial. Symmetry follows from the continuity of $-\colon G\to G$. For transitivity, note that every neighborhood $U$ of $0$ contains a neighborhood $V$ of $0$ such that $V+V\subset U$ (\cite[Proposition 1-1(i)]{FANF1999}) and then let $N$ be an integer such that for $i>N$ we have $x_i-y_i\in V$ and $y_i-z_i\in V$. It follows that for $i>N$ we have $x_i-z_i\in U$.
+            \item Let $(x_i)$ and $(y_i)$ be Cauchy sequences. Let $U$ be a neighborhood of $0$. There is a neighborhood $V$ of $0$ such that $V+V\subset U$. There is a positive integer $N$ such that for every $n>N$ we have $x_i,y_i\in V$ and $x_i+y_i\in U$.
+            \item Note that $(x_i+x'_i)-(y_i+y'_i)=(x_i-y_i)+(x'_i-y'_i)$ and use the fact that for every neighborhood $U$ of $0$ there is a neighborhood $V$ of $0$ such that $V+V\subset U$ to show that $(x_i+x'_i)-(y_i+y'_i)\to 0$.
+        \end{enumerate}
+    \end{proof}
+
+    \subsection{Profinite integers}
+
+    \printbibliography
 
 \end{document} 
