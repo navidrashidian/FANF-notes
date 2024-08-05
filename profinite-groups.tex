@@ -252,8 +252,50 @@
 
     \subsection{\texorpdfstring{$p$}{p}-adic Numbers}
 
+    % \begin{dfn}
+    %     Let $G$ be a topological group. A \emph{Cauchy sequence} in $G$ is a sequence $(x_i)$ of elements of $G$ such that, for any neighborhood $U$ of $0$, there is a positive integer $N$ such that for every $m,n\geq N$ we have $x_m-x_n\in U$. Two Cauchy sequences $(x_i)$ and $(y_i)$ are \emph{equivalent} if $x_i-y_i\to 0$ in $G$.
+    % \end{dfn}
+    
+    % \begin{proof}
+    %     \begin{enumerate}[label=(\alph*)]
+    %         \item Reflexivity is trivial. Symmetry follows from the continuity of $-\colon G\to G$. For transitivity, note that every neighborhood $U$ of $0$ contains a neighborhood $V$ of $0$ such that $V+V\subset U$ (\cite[Proposition 1-1(i)]{FANF1999}) and then let $N$ be an integer such that for $i>N$ we have $x_i-y_i\in V$ and $y_i-z_i\in V$. It follows that for $i>N$ we have $x_i-z_i\in U$.
+    %         \item Let $(x_i)$ and $(y_i)$ be Cauchy sequences. Let $U$ be a neighborhood of $0$. There is a neighborhood $V$ of $0$ such that $V+V\subset U$. There is a positive integer $N$ such that for every $n>N$ we have $x_i,y_i\in V$ and $x_i+y_i\in U$.
+    %         \item Note that $(x_i+x'_i)-(y_i+y'_i)=(x_i-y_i)+(x'_i-y'_i)$ and use the fact that for every neighborhood $U$ of $0$ there is a neighborhood $V$ of $0$ such that $V+V\subset U$ to show that $(x_i+x'_i)-(y_i+y'_i)\to 0$.
+    %     \end{enumerate}
+    % \end{proof}
+    
     \begin{dfn}
-        Let $G$ be a topological group. A \emph{Cauchy sequence} in $G$ is a sequence $(x_i)$ of elements of $G$ such that, for any neighborhood $U$ of $0$, there is a positive integer $N$ such that for every $m,n\geq N$ we have $x_m-x_n\in U$. Two Cauchy sequences $(x_i)$ and $(y_i)$ are \emph{equivalent} if $x_i-y_i\to 0$ in $G$.
+        Let $R$ be an integral domain. An \emph{absolute value on $R$} is a function $|.|\colon R\to \mathbb{R}$ such that for every $x,y\in R$ we have
+        \begin{enumerate}[label=(\alph*)]
+            \item $|x|\geq 0$;
+            \item $|x|=0$ iff $x=0$;
+            \item $|xy|=|x||y|$; and
+            \item $|x+y|\leq |x|+|y|$.
+        \end{enumerate}
+    \end{dfn}
+
+    \begin{dfn}
+        A \emph{metric space} is a set $M$ equipped with a function $d\colon M\times M\to \mathbb{R}$ such that for every $x,y,z\in M$ we have
+        \begin{enumerate}[label=(\alph*)]
+            \item $d(x,x)=0$;
+            \item if $x\neq y$ then $d(x,y)>0$;
+            \item $d(x,y) = d(y,x)$; and
+            \item $d(x,z)\leq d(x,y)+d(y,z)$.
+        \end{enumerate}
+    \end{dfn}
+
+    \begin{prop}
+        Let $R$ be an integral domain and $|.|$ an absolute value defined on $R$. Then $d(x,y)=|x-y|$ is a metric on $R$.
+    \end{prop}
+
+    \begin{dfn}
+        For any point $x\in M$ and any real number $r>0$ \emph{the open ball of radius $r$ around $x$} is defined by
+        $$B_r(x)=\{y\in M : d(x,y) < r\}$$
+        The open balls form the basis for the \emph{metric topology on $M$}.
+    \end{dfn}
+
+    \begin{dfn}
+        A sequence $(x_n)$ of points in a metric space $M$ is a \emph{Cauchy sequence} if for every $r>0$ there is a positive integer $N$ such that for every pair of positive integers $m,n\geq N$ we have $d(m,n)<r$. Two Cauchy sequences $(x_n)$ and $(y_n)$ are called \emph{equivalent} if $x_n-y_n$ converges to zero.
     \end{dfn}
 
     \begin{prop}
@@ -263,13 +305,52 @@
             \item Suppose $(x_i)\sim(y_i)$ and $(x'_i)\sim(y'_i)$. Then $(x_i+x'_i)\sim(y_i+y'_i)$.
         \end{enumerate}
     \end{prop}
-    
-    \begin{proof}
+
+    \begin{dfn}
+        A \emph{complete metric space} is a metric space in which every Cauchy sequence converges to a point in the space.
+    \end{dfn}
+
+    % define completion
+
+    \begin{dfn}
+        Let $p$ be a fixed prime. The \emph{$p$-adic valuation} is the function $v_p\colon\mathbb{Z}\to\mathbb{Z^+}\cup\{\infty\}$ which assigns to each positive integer $n$ the unique $e$ such that $n=p^em$ and $p\nmid m$ and assigns $\infty$ to 0. The \emph{$p$-adic absolute value} is the function $|.|_p\colon\mathbb{Z}\to \mathbb{R}$ defined by $|n|_p=p^{-v_p(n)}$.
+    \end{dfn}
+
+    \begin{prop}
+        The $p$-adic absolute value is an absolute value on $\mathbb{Z}$.
+    \end{prop}
+
+    \begin{exm}
+        Integers are not complete under the $p$-adic metric. The sequence $(p^n+1)$ is clearly Cauchy but doesn't converge to any integer. 
+    \end{exm}
+
+    \begin{dfn}
+        The group $\mathbb{Z}_p$ called the group of \emph{$p$-adic integers} is the completion of $\mathbb{Z}$ with respect to the $p$-adic metric.
+    \end{dfn}
+
+    We now want to prove that $\mathbb{Z}_p$ defined as the completion of $\mathbb{Z}$ with respect to the $p$-adic metric is the inverse limit of the projective system $\mathbb{Z}/p^e\mathbb{Z}$ with the natural projections $\varphi_{n(n+1)}\colon \mathbb{Z}/p^{n+1}\mathbb{Z}\to \mathbb{Z}/p^{n}\mathbb{Z}$.
+
+    \begin{prop}
+        The following are equivalent:
         \begin{enumerate}[label=(\alph*)]
-            \item Reflexivity is trivial. Symmetry follows from the continuity of $-\colon G\to G$. For transitivity, note that every neighborhood $U$ of $0$ contains a neighborhood $V$ of $0$ such that $V+V\subset U$ (\cite[Proposition 1-1(i)]{FANF1999}) and then let $N$ be an integer such that for $i>N$ we have $x_i-y_i\in V$ and $y_i-z_i\in V$. It follows that for $i>N$ we have $x_i-z_i\in U$.
-            \item Let $(x_i)$ and $(y_i)$ be Cauchy sequences. Let $U$ be a neighborhood of $0$. There is a neighborhood $V$ of $0$ such that $V+V\subset U$. There is a positive integer $N$ such that for every $n>N$ we have $x_i,y_i\in V$ and $x_i+y_i\in U$.
-            \item Note that $(x_i+x'_i)-(y_i+y'_i)=(x_i-y_i)+(x'_i-y'_i)$ and use the fact that for every neighborhood $U$ of $0$ there is a neighborhood $V$ of $0$ such that $V+V\subset U$ to show that $(x_i+x'_i)-(y_i+y'_i)\to 0$.
+            \item $|x_n-x_m|_p\leq p^{-e}$.
+            \item $v_p(x_n-x_m)\geq e$.
+            \item $x_n\equiv x_m \mod p^e$.
         \end{enumerate}
+    \end{prop}
+
+    \begin{proof}
+        Expand the definitions.
+    \end{proof}
+
+    \begin{prop}
+        Consider $\mathbb{Z}$ with the metric induced by the $p$-adic absolute value for a fixed prime $p$. Let $(x_n)$ be a Cauchy sequence. For every positive integer $e$ the remainder of $x_i$'s modulo $p^e$ eventually stops. Moroever, if $(x_n)$ and $(y_n)$ are equivalent Cauchy sequences, their remainders modulo $p^e$ stop on the same number. Therefore, remainder modulo $p^e$ defines a function $\varphi_e\colon \mathbb{Z}_p\to \mathbb{Z}/p^e\mathbb{Z}$. The function $\varphi_e$ is a continuous group homomorphism.
+    \end{prop}
+
+    \begin{proof}
+        Let $r=p^{-e}$. There is a positive integer $N$ such that for every pair of positive integers $m,n> N$ we have $x_m-x_n<r$ or equivalently
+        $$x_m\equiv x_n \mod p^e$$
+        A similar argument proves the other claim. That $\varphi_e$ respects addition is obvious. For continuity note that if $\varphi_e((x_n))=\varphi_e((y_n))$ then 
     \end{proof}
 
     \subsection{Profinite integers}
