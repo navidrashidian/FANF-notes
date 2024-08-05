@@ -11,6 +11,7 @@
 
 \newtheorem{thm}{Theorem}[section]
 \newtheorem{prop}[thm]{Proposition}
+\newtheorem{lem}[thm]{Lemma}
 
 \theoremstyle{definition}
 \newtheorem{dfn}[thm]{Definition}
@@ -32,6 +33,8 @@
 \newcommand*{\Top}{\catname{Top}}
 \newcommand*{\TopGrp}{\catname{TopGrp}}
 
+\newcommand{\zee}{\mathbb{Z}}
+\newcommand{\zeehat}{\hat{\mathbb{Z}}}
 
 \newcommand{\Obj}[1]{\textup{Obj}(#1)}
 \newcommand{\Mor}[1]{\textup{Mor}(#1)}
@@ -178,7 +181,7 @@
     \end{dfn}
 
     \begin{rem}
-         Since in a preorder there is at most one morphism between any two objects, in a given projective system we could denote the possible morphism $X_J\to X_I$ as $\varphi_{IJ}$ without ambiquity (note the difference in order). We will usually denote a projective system by $\langle X_I,\varphi_{IJ}\rangle$. We will also usually call describe the family of maps in a cone on $F$ as a family of maps compatible with the projective system.
+         Since in a preorder there is at most one morphism between any two objects, in a given projective system we could denote the possible morphism $X_J\to X_I$ as $\varphi_{IJ}$ without ambiquity (note the difference in order). We will usually denote a projective system by $\langle X_I,\varphi_{IJ}\rangle$. We will also usually describe the family of maps in a cone on $F$ as a family of maps compatible with the projective system.
     \end{rem}
 
     \begin{dfn}
@@ -251,6 +254,7 @@
     \end{proof}
 
     \subsection{\texorpdfstring{$p$}{p}-adic Numbers}
+    (Many facts in this section are taken for granted.)
 
     % \begin{dfn}
     %     Let $G$ be a topological group. A \emph{Cauchy sequence} in $G$ is a sequence $(x_i)$ of elements of $G$ such that, for any neighborhood $U$ of $0$, there is a positive integer $N$ such that for every $m,n\geq N$ we have $x_m-x_n\in U$. Two Cauchy sequences $(x_i)$ and $(y_i)$ are \emph{equivalent} if $x_i-y_i\to 0$ in $G$.
@@ -299,10 +303,14 @@
     \end{dfn}
 
     \begin{prop}
+        The equivalence defined on Cauchy sequences is an equivalence relation.
+    \end{prop}
+    
+    \begin{prop}
+        Assume that $+$ and $\cdot$ are continuous with respect to the metric topology.
         \begin{enumerate}[label=(\alph*)]
-            \item The equivalence defined on Cauchy sequences is an equivalence relation.
-            \item Sum of two Cauchy sequences is Cauchy.
-            \item Suppose $(x_i)\sim(y_i)$ and $(x'_i)\sim(y'_i)$. Then $(x_i+x'_i)\sim(y_i+y'_i)$.
+            \item If $(x_i)$ and $(y_i)$ are Cauchy, then so is $(x_i+y_i)$ and $(x_iy_i)$.
+            \item Suppose $(x_i)\sim(y_i)$ and $(x'_i)\sim(y'_i)$. Then $(x_i+x'_i)\sim(y_i+y'_i)$ and $(x_ix'_i)\sim(y_iy'_i)$.
         \end{enumerate}
     \end{prop}
 
@@ -310,7 +318,9 @@
         A \emph{complete metric space} is a metric space in which every Cauchy sequence converges to a point in the space.
     \end{dfn}
 
-    % define completion
+    \begin{dfn}
+        Let $M$ be a metric space and $\tilde{M}$ the set of Cauchy sequences with members in $M$. Then $\hat{M}=\tilde{M}/\sim$ is called \emph{the completion of $M$}. The distance function on $\tilde{M}$ is defined by $\lim_{n}d(x_n,y_n)$.
+    \end{dfn}
 
     \begin{dfn}
         Let $p$ be a fixed prime. The \emph{$p$-adic valuation} is the function $v_p\colon\mathbb{Z}\to\mathbb{Z^+}\cup\{\infty\}$ which assigns to each positive integer $n$ the unique $e$ such that $n=p^em$ and $p\nmid m$ and assigns $\infty$ to 0. The \emph{$p$-adic absolute value} is the function $|.|_p\colon\mathbb{Z}\to \mathbb{R}$ defined by $|n|_p=p^{-v_p(n)}$.
@@ -330,30 +340,53 @@
 
     We now want to prove that $\mathbb{Z}_p$ defined as the completion of $\mathbb{Z}$ with respect to the $p$-adic metric is the inverse limit of the projective system $\mathbb{Z}/p^e\mathbb{Z}$ with the natural projections $\varphi_{n(n+1)}\colon \mathbb{Z}/p^{n+1}\mathbb{Z}\to \mathbb{Z}/p^{n}\mathbb{Z}$.
 
-    \begin{prop}
+    \begin{lem}
         The following are equivalent:
         \begin{enumerate}[label=(\alph*)]
             \item $|x_n-x_m|_p\leq p^{-e}$.
             \item $v_p(x_n-x_m)\geq e$.
             \item $x_n\equiv x_m \mod p^e$.
         \end{enumerate}
-    \end{prop}
+    \end{lem}
 
     \begin{proof}
         Expand the definitions.
     \end{proof}
 
-    \begin{prop}
-        Consider $\mathbb{Z}$ with the metric induced by the $p$-adic absolute value for a fixed prime $p$. Let $(x_n)$ be a Cauchy sequence. For every positive integer $e$ the remainder of $x_i$'s modulo $p^e$ eventually stops. Moroever, if $(x_n)$ and $(y_n)$ are equivalent Cauchy sequences, their remainders modulo $p^e$ stop on the same number. Therefore, remainder modulo $p^e$ defines a function $\varphi_e\colon \mathbb{Z}_p\to \mathbb{Z}/p^e\mathbb{Z}$. The function $\varphi_e$ is a continuous group homomorphism.
-    \end{prop}
+    \begin{lem}
+        Consider $\mathbb{Z}$ with the metric induced by the $p$-adic absolute value for a fixed prime $p$. Let $(x_n)$ be a Cauchy sequence. For every positive integer $e$ the remainder of $x_i$'s modulo $p^e$ eventually stops. Moroever, if $(x_n)$ and $(y_n)$ are equivalent Cauchy sequences, their remainders modulo $p^e$ stop on the same number. Therefore, remainder modulo $p^e$ defines a function $\varphi_e\colon \mathbb{Z}_p\to \mathbb{Z}/p^e\mathbb{Z}$. The function $\varphi_e$ is a continuous ring homomorphism.
+    \end{lem}
 
     \begin{proof}
         Let $r=p^{-e}$. There is a positive integer $N$ such that for every pair of positive integers $m,n> N$ we have $x_m-x_n<r$ or equivalently
         $$x_m\equiv x_n \mod p^e$$
-        A similar argument proves the other claim. That $\varphi_e$ respects addition is obvious. For continuity note that if $\varphi_e((x_n))=\varphi_e((y_n))$ then 
+        A similar argument proves the other claim. That $\varphi_e$ respects addition and multiplication is obvious. For continuity note that if $\varphi_e((x_n))=\varphi_e((y_n))$ then\ldots % complete
     \end{proof}
 
-    \subsection{Profinite integers}
+    \subsection{Profinite Integers}
+
+    \begin{dfn}
+        Consider the family of rings $\zee/n\zee$ for every positive integer $n$. For every $m,n$ such that $m\mid n$ there is a canonical projection $\varphi_{mn}\colon\zee/n\zee\to\zee/m\zee$. It is clear that this family of sets and projections form a projective system in the category of topological rings. The projective limit of this projective system is called \emph{profinite completion of integers} and is denoted by $\zeehat$.
+    \end{dfn}
+
+    \begin{prop}[Chinese Remainder Theorem]
+        Let $n_1,\cdots,n_k$ be coprime integers and $N=n_1\cdots n_k$. The map
+        $$x \mod N \mapsto (x \mod n_1,\cdots,x \mod n_k)$$
+        is an isomorphism of rings
+        $$\mathbb{Z}/N\mathbb{Z}\cong \mathbb{Z}/n_1\mathbb{Z}\times\cdots\times\mathbb{Z}/n_k\mathbb{Z}$$
+    \end{prop}
+
+    \begin{prop}
+        $\zeehat\cong\prod_{p\textup{ prime}}\zee_p$.
+    \end{prop}
+
+    \begin{proof}
+        Let $(x_n)\in\zeehat$ be a coherent sequence of elements of all $\zee/n\zee$s. Let $n=p_1^{v_{p_1}(n)}\cdots p_k^{v_{p_k}(n)}$ be a positive integer. According to the Chinese Remainder Theorem, for any integer $x$ the remainder of $x$ modulo all $p_i^{{v_i}(n)}$'s completely determines its remainder moduolo $n$. Hence $(x_n)$ is fully determined by the $x_i$'s such that $i=p^e$ for a prime $p$ and a positive integer $e$. This induces a bijection between $\zeehat$ and $\prod_{p\textup{ prime}}\zee_p$. That this bijection is a ring homomorphism follows from the fact that in both cases the arithmetic operations are inherited from the arithmetic operations on $\zee$.
+    \end{proof}
+
+    \begin{exm}
+        The projections $\varphi_{mn}$ map units of $\zee/n\zee$ to units in $\zee/m\zee$. Therefore the groups $(\zee/n\zee)^\times$ for all positive integers $n$ and canonical projections $\varphi_{mn}$ form a projective system. Let $(\zeehat)^\times$ denote the inverse limit of this system. It is clear that $(\zeehat)^\times$ is the group of units of $\zeehat$. Also from the fact that $\zeehat\cong\prod_{p\textup{ prime}}\zee_p$ it can be easily deduced that $(\zeehat)^\times\cong\prod_{p \textup{ prime}}(\zee_p)^\times$.
+    \end{exm}
 
     \printbibliography
 
