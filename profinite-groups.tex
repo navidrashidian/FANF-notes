@@ -36,9 +36,13 @@
 \newcommand{\zee}{\mathbb{Z}}
 \newcommand{\zeehat}{\hat{\mathbb{Z}}}
 
+\newcommand*{\nor}{\mathcal{N}}
+
 \newcommand{\Obj}[1]{\textup{Obj}(#1)}
 \newcommand{\Mor}[1]{\textup{Mor}(#1)}
 \newcommand{\Hom}[2]{\textup{Hom}(#1,#2)}
+
+\newcommand{\gcirc}{G^\circ}
 
 \addbibresource{profinite-groups.bib}
 
@@ -237,24 +241,9 @@
         A topological group $G$ is called a \emph{profinite group} if there is a projective system $\langle G_I,\varphi_{IJ}\rangle$ such that $G$ is the projective limit of this projective system in the category $\catname{TopGrp}$. The topology on $G$ is called the \emph{profinite topology}.
     \end{dfn}
 
-    \begin{prop}
-        Let $G$ be a profinite group, given as a limit of the projective system $\langle G_I,\varphi_{IJ}\rangle$. Then,
-        \begin{enumerate}[label=(\alph*)]
-            \item $G$ is Hausdorff;
-            \item $G$ is a closed subset of the direct product $\prod G_I$; and
-            \item $G$ is compact.
-        \end{enumerate}
-    \end{prop}
-    \begin{proof}
-        \begin{enumerate}[label=(\alph*)]
-            \item The direct product of Hausdorff spaces is Hausdorff. Hence, $G$ is Hausdorff.
-            \item % complete
-            \item The direct product $\prod G_I$ is compact. A closed subset of a compact space equipped with the subspace topology is compact.
-        \end{enumerate}
-    \end{proof}
+    The following sections introduce some examples of pro-finite groups.
 
     \subsection{\texorpdfstring{$p$}{p}-adic Numbers}
-    (Many facts in this section are taken for granted.)
 
     % \begin{dfn}
     %     Let $G$ be a topological group. A \emph{Cauchy sequence} in $G$ is a sequence $(x_i)$ of elements of $G$ such that, for any neighborhood $U$ of $0$, there is a positive integer $N$ such that for every $m,n\geq N$ we have $x_m-x_n\in U$. Two Cauchy sequences $(x_i)$ and $(y_i)$ are \emph{equivalent} if $x_i-y_i\to 0$ in $G$.
@@ -387,6 +376,190 @@
     \begin{exm}
         The projections $\varphi_{mn}$ map units of $\zee/n\zee$ to units in $\zee/m\zee$. Therefore the groups $(\zee/n\zee)^\times$ for all positive integers $n$ and canonical projections $\varphi_{mn}$ form a projective system. Let $(\zeehat)^\times$ denote the inverse limit of this system. It is clear that $(\zeehat)^\times$ is the group of units of $\zeehat$. Also from the fact that $\zeehat\cong\prod_{p\textup{ prime}}\zee_p$ it can be easily deduced that $(\zeehat)^\times\cong\prod_{p \textup{ prime}}(\zee_p)^\times$.
     \end{exm}
+
+    \section{The topology of profinite groups}
+    
+    The following propositions states some of the most important global properties of profinite groups.
+
+    \begin{prop}\label{prop:top}
+        Let $G$ be a profinite group, given as a limit of the projective system $\langle G_I,\varphi_{IJ}\rangle$. Then,
+        \begin{enumerate}[label=(\alph*)]
+            \item $G$ is Hausdorff;
+            \item $G$ is a closed subset of the direct product $\prod G_I$; and
+            \item\label{prop:top:compact} $G$ is compact.
+        \end{enumerate}
+    \end{prop}
+    \begin{proof}
+        \begin{enumerate}[label=(\alph*)]
+            \item The direct product of Hausdorff spaces is Hausdorff. Hence, $G$ is Hausdorff.
+            \item % complete
+            \item The direct product $\prod G_I$ is compact. A closed subset of a compact space equipped with the subspace topology is compact.
+        \end{enumerate}
+    \end{proof}
+
+    Another important topological property of profinite groups is being totally disconnected. Finally, we will see that profinite groups are exactly compact and totally disconnected topological groups. First, we need to review some definitions from general topology.
+
+    \begin{dfn}
+        A topological space $X$ is called \emph{connected} if whenever $X=U\cup V$ for non-empty open sets $U$ and $V$ then $U\cap V\neq\varnothing$. A subset $Y\subset X$ is called \emph{a connected subset} if it is a connected space with respect to the subspace topology.
+    \end{dfn}
+
+    \begin{prop}
+        A topological space $X$ is connected iff for any two non-empty closed sets $U$ and $V$ such that $X=U\cup V$ we have $U\cap V\neq\varnothing$.
+    \end{prop}
+    \begin{proof}
+        Let $X=U\cap V$ be a connected space and $U$ and $V$ closed sets. Suppose $U\cap V=\varnothing$. Then $U$ and $V$ are open, which results in a contradiction. The argument for the other direction is similar.
+    \end{proof}
+
+    We will take for granted that every point in a topological space is contained in a maximal connected subspaces:
+    \begin{dfn}
+        Let $X$ be a topological space and $x\in X$. The maximal connected subspace of $X$ that includes $x$ is called the \emph{connected component of $x$}. In a topological group the connected component of identity is denoted by $G^\circ$.
+    \end{dfn}
+
+    \begin{dfn}
+        A topological space is called \emph{totally disconnected} if the connected component of each point is its singleton.
+    \end{dfn}
+
+    We have seen that a topological group is homogenous in the sense that for every $x,y\in X$ there is a homeomorphism (vid. $z\mapsto zx^{-1}y$) that maps $x$ to $y$. Since homeomorphisms bijectively map connected components to connected components it is easy to see that a topological space is totally disconnected if and only if $G^\circ=\{e\}$.
+
+    \begin{lem}\label{lem:gcirc}
+        In a topological group $G$ the subset $\gcirc$ is a normal subgroup which is contained in every open subgroup.
+    \end{lem}
+
+    \begin{proof}
+        Let $x\in\gcirc$. Then $x^{-1}\gcirc$ is connected by homogeneity and includes identity. Therefore $x^{-1}\gcirc\subset\gcirc$ which implies $x^{-1}\in\gcirc$. This shows that $\gcirc$ is closed under inverses. Since $x^{-1}\in\gcirc$, we know $x\gcirc$ includes identity too and is connected by homogeneity. Hence, $x\gcirc\subset\gcirc$ which shows $\gcirc$ is closed under multiplication. Now, $x\gcirc x^{-1}$ is also connected and includes identity and therefore is contained in $\gcirc$. This shows that $\gcirc$ is a normal subgroup of $G$.
+
+        Let $U$ be an open subgroup of $G$. Then $U\cap G^\circ$ is an open subgroup of $G^\circ$ according to the subspace topology. From elementary group theory we know that $\gcirc$ is partitioned into the cosets of $U\cap\gcirc$. Now, every coset of the form $x\cdot (U\cap G^\circ)$ must be open by translation invariance. Therefore we could partition $\gcirc$ into $U\cap\gcirc$ and the union of all other cosets
+        $$
+        V=\bigcup_{x\in\gcirc-U}x\cdot(U\cap\gcirc)
+        $$
+        which is also open according to the subspace topology. Since $U\cap\gcirc$ and $V$ are disjoint and $\gcirc$ is connected, one of them must be empty. Identity is in $U\cap\gcirc$, so $V$ is the empty one. It follows that $\gcirc=U\cap\gcirc$ or equivalently $\gcirc\subset U$.
+    \end{proof}
+
+    \begin{prop}\label{prop:tod}
+        A topological group $G$ is totally disconnected.
+    \end{prop}
+
+    \begin{proof}
+        It suffices to prove that $G^\circ=\{e\}$. Let $G=\varprojlim G_I$. For every $I$, the set $\pi^{-1}_I(\{e_I\})$ is an open subgroup of $G$. From Lemma \ref{lem:gcirc} it follows that $\gcirc\subset\pi^{-1}_I(\{e_I\})$. Identifying $G$ with the set of coherent sequences of members of $G_I$'s, it follows that if $(x_I)\in \gcirc$, then for every $I$ we have $x_I=e_I$, which completes our proof.
+    \end{proof}
+
+    \begin{lem}
+        Let $\nor$ be the family of open normal subgroups of a compact topological group $G$. Then,
+        \begin{enumerate}[label=(\alph*)]
+            \item For each $N\in\nor$, the quotient group $G/N$ is compact and discrete, and hence finite.
+            \item The relation $M\leq N$ if $N\subset M$ is a preorder on $\nor$. The maps $\varphi_{MN}\colon xN\mapsto xM$ create a projective system modelled on this directed set. Moreover, $G$ and the natural projections $\pi_N\colon G\to G/N$ form a cone on this system.
+        \end{enumerate}
+    \end{lem}
+
+    \begin{proof}
+        \begin{enumerate}[label=(\alph*)]
+            \item Quotients of a compact space are compact. The quotient topology is the finest topology that makes the natural projection map continuous. For every $xN\in G/N$, we know that $xN$ is open in $G$ since $N$ is open and every translation of an open subset is open. Hence the discrete topology makes the natural projection map continuous. Compact spaces are discrete if and only if they are finite, therefore $G/N$ is finite.
+            \item It is trivial that the relation is a preorder. To see that the maps $\varphi_{MN}$ create a projective system it suffices to note that for $L\leq M\leq N$ then $\varphi_{LM}\circ\varphi_{MN}=\varphi_{LM}$.
+            
+            To see that $G$ and the projection maps $\pi_N\colon G\to G/N$ form a cone on this projective system note that the following diagram commutes:
+
+            \[\begin{tikzcd}
+                & G \\
+                \\
+                {G/N} && {G/M}
+                \arrow["{\pi_N}"', from=1-2, to=3-1]
+                \arrow["{\pi_M}", from=1-2, to=3-3]
+                \arrow["{\varphi_{MN}}"', from=3-1, to=3-3]
+            \end{tikzcd}\]
+        \end{enumerate}
+    \end{proof}
+
+    \begin{lem}\label{lem:sur}
+        Let $G$ be a compact topological group and $$G'=\varprojlim_{N\in\nor} G/N$$
+        There is a surjective continuous group homomorphism $\alpha\colon G\to G'$.
+    \end{lem}
+
+    \begin{proof}
+        Since $G$ and the natural projection maps $\pi_N\colon G\to G/N$ form a cone over the $G/N$'s, then according to the universal property of projective limits there is a continuous group homomorphism $\alpha\colon G\to G'$. We only need to show that $\alpha$ is surjective.
+
+        To prove surjectivity, first assume that $\alpha(G)$ is dense in $G'$. Then, since $G$ is compact, and the continuous image of a compact space is compact, we can conclude that $\alpha(G)$ is compact in $G'$. In a Hausdorff space compact subspaces are closed. Hence $\alpha(G)$ is closed and, therefore, is its own closure. The closure of a dense subset is the whole space, hence if $\alpha(G)$ is dense, it equals $G'$. So it suffices to prove that $\alpha(G)$ is dense in $G'$.
+
+        To prove that $\alpha(G)$ is dense in $G'$ we will prove that it is not disjoint from any non-empty open set. If the $p_N\colon G'\to G/N$ are the projection maps from $G'$, a subbasis for the topoology on $G'$ is the set of subsets of the form $p^{-1}_N(S_N)$ for arbitrary subsets $S_N\subset G/N$. Finite intersections of such sets form a basis for the topology on $G'$. Since open sets in $G'$ are unions of such sets, it suffices for us to prove that no set in the basis is disjoint from $\alpha(G)$. Let
+        $$p^{-1}_{N_1}(S_{N_1})\cap\cdots\cap p^{-1}_{N_j}(S_{N_r})$$
+        be a member of the basis. Then
+        $$M=N_1\cap\cdots\cap N_r$$
+        is an open normal subgroup of $G$. Note that since every sequence $(x_N)\in G'$ must be compatible with the maps $\varphi_{MN_i}\colon G/N_i\to G/M$, the element $x_M$ fully determines the value of $x_{N_i}$ for every $1\leq i\leq r$. Therefore
+        $$
+        U = p^{-1}_M\bigg(\bigcap_{i=1}^{r} \varphi_{MN_i}(S_{N_i})\bigg)
+        $$
+        Now suppose $U$ is non-empty, \emph{i.e.} there is a $(x_N)\in G'$ such that
+        $$x_M\in \bigcap_{i=1}^{r} \varphi_{MN_i}(S_{N_i})$$
+        Since $\pi_M\colon G\to G/M$ is surjective there should be a $t\in G$ such that $\pi_M(t)=x_M$. Note that since the diagram
+        \[\begin{tikzcd}
+            G && {G'} \\
+            \\
+            && {G/M}
+            \arrow["\alpha"', from=1-1, to=1-3]
+            \arrow["{\pi_M}", from=1-1, to=3-3]
+            \arrow["{p_M}"', from=1-3, to=3-3]
+        \end{tikzcd}\]
+        commutes according to the universal property of projective limits, we have $p_M(\alpha(t))=x_M$. Therefore, $\alpha(t)\in U$ and $U$ intersects $\alpha(G)$ as desired.
+    \end{proof}
+
+    \begin{lem}\label{lem:ons}
+        Let $G$ be a compact, totally disconnected topological group. Then every neighborhood of identity contains an open normal subgroup.
+    \end{lem}
+
+    \begin{proof}
+        Let $U$ be an open neighborhood of identity. The proof proceeds in three steps.
+
+        \noindent\emph{Step 1. There is a compact, open neighborhood of identity $W\subset U$.}
+
+        First, note that $G$ is Hausdorff since for any two points $x\neq y$ there should be open sets seperating them or otherwise $\{x,y\}$ would be connected. From this it follows that $G-U$ is compact, since in a Hausdorff space closed sets are compact.
+
+        Now, let $Y$ be the intersection of all compact open neighborhoods of identity. $Y$ is connected according to \cite[Lemma 1-16]{FANF1999}. Therefore, $Y=\{e\}$. This implies that the complements of compact neighborhoods of identity cover $G-U$. Since $G-U$ is compact it follows from this that there are compact, open neighborhoods $K_1,\cdots,K_r$ of identity whose complements cover $G-U$. Let
+        $$
+        W=\bigcap_{i=1}^r K_i
+        $$
+        The set $W$ is an intersection of closed sets and is hence closed. Since $G$ is Hausdorff, $W$ must also be compact. Moreover, $W$ is a finite intersection of open sets and is therefore open. This completes Step 1.
+        
+        \noindent\emph{Step 2. There is a symmetric, open neighborhood of identity $V$ such that $WV\subset W$.}
+
+        Recall that a set $V$ is called symmetric if $V^{-1}=V$. Now, consider the continuous map $\mu\colon W\times W \to G$ which is the restriction of the group operation on $G$ to $W \times W$. Since $W$ is open, $\mu^{-1}(W)$ must be open in $W \times W$. In the case of the product of finitely many topological spaces, the product topology conincides with the box topology and is generated by products of open sets. This means that
+        $$ \mu^{-1} = \bigcup_{i \in I} U_i \times V_i $$
+        for some index set $I$ such that all sets $U_i$ and $V_i$ are open in $W$. Since for every $w \in W$ we have $(w,e)\in\mu^{-1}(W)$ this implies that for every $w\in W$ there are open sets $U_w$ containing $w$ and $V_w$ containing $e$ such that $U_w\times V_w\subset \mu^{-1}(W)$. Moreover, since according to \cite[Proposition 1-1(ii)]{FANF1999} every neighborhood of identity contains a symmetric, open neighborhood of identity we may assume that all sets $V_w$ are symmetric. The sets $U_w$ clearly cover $W$ and since $W$ is compact a finite sub-cover $U_1,\cdots,U_r$ must exist. If $V_1,\cdots,V_r$ are the associated symmetric neighborhoods of identity, the set
+        $$ V = \bigcap_{i=0}^r V_r $$
+        is symmetric and open and $WV\subset W$ by construction.
+
+        \noindent\emph{Step 3. There is an open subgroup $O$ contained in $W$.}
+
+        It follows from the fact that $WV \subset W$ that $V \subset W$. By induction, it can be proved that $V^n \subset W$ for any integer $n \geq 1$. Now, let
+        $$ O = \bigcup_{n\geq 1} V^n $$
+        It is clear that $O$ is open and is closed under inverses and multiplication.
+
+        \noindent\emph{Step 4. There is an open normal subgroup $N$ of $G$ contained in $W$.}
+        
+        Since $O$ is open in $G$, $G/O$ (considered simply as a quotient topological) has the discrete topology. Since $G/O$ is moreover compact, it follows that it is finite. Hence, $O$ has finitely many cosets in $G$. Let these cosets be represented by $x_1O,\cdots,x_sO$. By elementary group theory, it follows that the conjugates of $O$ are all of the form $x_iOx_i^{-1}$ for some $1\leq i\leq s$. Let
+        $$ N = \bigcap_{i=1}^s x_iOx_i^{-1} $$
+        It is clear that $N$ is open. Moreover, after doing some group theory it becomes evident that $N$ is a normal subgroup of $G$. Finally, since $O$ is a conjugate of itself and, therefore, $N\subset O$ we also have $N\subset W$ as desired.
+    \end{proof}
+
+    \begin{lem}\label{lem:chb}
+        Let $f\colon X\to Y$ be a continuous bijective mapping of topological spaces where $X$ is compact and $Y$ is Hausdorff. Then $f$ is a homeomorphism.
+    \end{lem}
+
+    \begin{proof}
+        We need to prove that $f^{-1}$ is continuous, \emph{i.e.} for every open set $U\subset X$, the set $(f^{-1})^{-1}(U)=f(U)$ is open in $Y$. For every open set $U\subset X$, its complement $U^c$ is closed in $X$ and hence compact. The continuous image of a compact set is compact and therefore $f(U^c)$ is compact in $Y$. In a Hausdorff space, compact sets are closed and therefore $f(U^c)$ is closed in $Y$. This implies that $f(U)=f(U^c)^c$ is open in $Y$.
+    \end{proof}
+
+    Now we are in a position to prove the following:
+
+    \begin{thm}
+        A topological group is profinite if and only if it is compact and totally disconnected.        
+    \end{thm}
+
+    \begin{proof}
+        One side follows from Propositions \ref{prop:top}\ref{prop:top:compact} and \ref{prop:tod}. For the other side let $G$ be a compact, totally disconnected topological group. From Lemma \ref{lem:sur} we know that there is a continuous surjective group homomorphism $\alpha\colon G\to\varprojlim G/N$. By Lemma \ref{lem:chb}, it suffices to prove that $\alpha$ is injective, \emph{i.e.} it has trivial kernel. Note that
+        $$
+        \textup{ker }\alpha \subset \bigcup_{N\in\nor} N \subset \bigcup_{\substack{U \text{ open} \\ \text{nbhd. of } e}} U = \{e\}
+        $$
+        where the second inclusion follows from Lemma \ref{lem:ons} and the equality is an implication of $G$ being totally disconnected. (Suppose the intersection of all open neighborhoods of identity includes an element $x\neq e$. Then $\{e,x\}$ would be a connected subspace of $G$ that contains $e$.) Therefore, $\textup{ker }\alpha=\{e\}$ and $\alpha$ is injective as desired.
+    \end{proof}
 
     \printbibliography
 
