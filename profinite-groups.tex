@@ -349,7 +349,9 @@
     \begin{proof}
         Let $r=p^{-e}$. There is a positive integer $N$ such that for every pair of positive integers $m,n> N$ we have $x_m-x_n<r$ or equivalently
         $$x_m\equiv x_n \mod p^e$$
-        A similar argument proves the other claim. That $\varphi_e$ respects addition and multiplication is obvious. For continuity note that if $\varphi_e((x_n))=\varphi_e((y_n))$ then\ldots % complete
+        A similar argument proves the other claim. That $\varphi_e$ respects addition and multiplication is obvious. For continuity it suffices to prove that the pre-image of singletons is open. Now, consider $\varphi_e((x_n))=\varphi_e((y_n))$. Then
+        $$d((x_n),(y_n))=\lim_nd(x_n,y_n)\leq p^{-e}$$
+        Moreover, it is clear that the converse implication is also true. Hence, the pre-image of $\varphi_e((x_n))$ is exactly the open ball of radius $p^{-e}$ around $(x_n)$.
     \end{proof}
 
     \subsection{Profinite Integers}
