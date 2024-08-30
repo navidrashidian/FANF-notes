@@ -3,7 +3,7 @@
 \usepackage{enumitem}
 \usepackage[hidelinks]{hyperref}
 
-\usepackage[backend=bibtex,style=numeric]{biblatex}
+\usepackage[backend=bibtex, style=numeric, citestyle=numeric-comp]{biblatex}
 
 \usepackage{amsmath,amssymb,amsfonts,amsthm}
 
@@ -394,7 +394,11 @@
     \begin{proof}
         \begin{enumerate}[label=(\alph*)]
             \item The direct product of Hausdorff spaces is Hausdorff. Hence, $G$ is Hausdorff.
-            \item % complete
+            \item The complement of $G$ in $\prod G_I$ is the set of sequences in $\prod G_I$ that are not coherent, \emph{i.e.} sequences $(x_I)$ such that for some $I\leq J$ we have $\varphi_{IJ}(x_J)\neq(x_I)$. Now, fix some $I\leq J$ and some $x_J\in G_J$. The set of sequences $(x_I)\in\prod G_I$ whose element with index $J$ equals $x_J$ and furthermore satisfy the condition $\varphi_{IJ}(x_J)\neq(x_I)$ is the intersection of the pre-images of $\{x_J\}\subset G_J$ and $G_I - \{\varphi_{IJ}(x_J)\}\subset G_I$ which is clearly open. Therefore,
+            $$
+            G^c=\bigcup_I\bigcup_{J\geq I}\{(g_I)\in\prod G_I:\varphi_{IJ}(x_J)\neq(x_I)\}
+            $$
+            is a union of open sets and hence open.
             \item The direct product $\prod G_I$ is compact. A closed subset of a compact space equipped with the subspace topology is compact.
         \end{enumerate}
     \end{proof}
@@ -512,9 +516,9 @@
 
         \noindent\emph{Step 1. There is a compact, open neighborhood of identity $W\subset U$.}
 
-        First, note that $G$ is Hausdorff since for any two points $x\neq y$ there should be open sets seperating them or otherwise $\{x,y\}$ would be connected. From this it follows that $G-U$ is compact, since in a Hausdorff space closed sets are compact.
+        First, note that $G$ is Hausdorff since for any two points $x\neq y$ there should be open sets seperating them or otherwise $\{x,y\}$ would be connected and for topological groups satisfying $T_1$ is equivalent to being Hausdorff (\cite[Proposition 1-3]{FANF1999}). From this it follows that $G-U$ is compact, since in a Hausdorff space closed sets are compact.
 
-        Now, let $Y$ be the intersection of all compact open neighborhoods of identity. $Y$ is connected according to \cite[Lemma 1-16]{FANF1999}. Therefore, $Y=\{e\}$. This implies that the complements of compact neighborhoods of identity cover $G-U$. Since $G-U$ is compact it follows from this that there are compact, open neighborhoods $K_1,\cdots,K_r$ of identity whose complements cover $G-U$. Let
+        Now, let $Y$ be the intersection of all compact open neighborhoods of identity. The set $Y$ is connected according to \cite[Lemma 1-16]{FANF1999}. Therefore, $Y=\{e\}$. This implies that the complements of compact neighborhoods of identity cover $G-U$. Since $G-U$ is compact it follows from this that there are compact, open neighborhoods $K_1,\cdots,K_r$ of identity whose complements cover $G-U$. Let
         $$
         W=\bigcap_{i=1}^r K_i
         $$
@@ -526,17 +530,17 @@
         $$ \mu^{-1} = \bigcup_{i \in I} U_i \times V_i $$
         for some index set $I$ such that all sets $U_i$ and $V_i$ are open in $W$. Since for every $w \in W$ we have $(w,e)\in\mu^{-1}(W)$ this implies that for every $w\in W$ there are open sets $U_w$ containing $w$ and $V_w$ containing $e$ such that $U_w\times V_w\subset \mu^{-1}(W)$. Moreover, since according to \cite[Proposition 1-1(ii)]{FANF1999} every neighborhood of identity contains a symmetric, open neighborhood of identity we may assume that all sets $V_w$ are symmetric. The sets $U_w$ clearly cover $W$ and since $W$ is compact a finite sub-cover $U_1,\cdots,U_r$ must exist. If $V_1,\cdots,V_r$ are the associated symmetric neighborhoods of identity, the set
         $$ V = \bigcap_{i=0}^r V_r $$
-        is symmetric and open and $WV\subset W$ by construction.
+        is symmetric and open and the condition $WV\subset W$ is satisfied by construction.
 
         \noindent\emph{Step 3. There is an open subgroup $O$ contained in $W$.}
 
-        It follows from the fact that $WV \subset W$ that $V \subset W$. By induction, it can be proved that $V^n \subset W$ for any integer $n \geq 1$. Now, let
+        It follows from the fact that $WV \subset W$ and $e \in W$ that $V \subset W$. By induction, it can be proved that $V^n \subset W$ for any integer $n \geq 1$. Now, let
         $$ O = \bigcup_{n\geq 1} V^n $$
         It is clear that $O$ is open and is closed under inverses and multiplication.
 
         \noindent\emph{Step 4. There is an open normal subgroup $N$ of $G$ contained in $W$.}
         
-        Since $O$ is open in $G$, $G/O$ (considered simply as a quotient topological) has the discrete topology. Since $G/O$ is moreover compact, it follows that it is finite. Hence, $O$ has finitely many cosets in $G$. Let these cosets be represented by $x_1O,\cdots,x_sO$. By elementary group theory, it follows that the conjugates of $O$ are all of the form $x_iOx_i^{-1}$ for some $1\leq i\leq s$. Let
+        Since $O$ is open in $G$, $G/O$ (considered simply as a quotient topological space) has the discrete topology. Since $G/O$ is moreover compact, it follows that it is finite. Hence, $O$ has finitely many cosets in $G$. Let these cosets be represented by $x_1O,\cdots,x_sO$. By elementary group theory, it follows that the conjugates of $O$ are all of the form $x_iOx_i^{-1}$ for some $1\leq i\leq s$. Let
         $$ N = \bigcap_{i=1}^s x_iOx_i^{-1} $$
         It is clear that $N$ is open. Moreover, after doing some group theory it becomes evident that $N$ is a normal subgroup of $G$. Finally, since $O$ is a conjugate of itself and, therefore, $N\subset O$ we also have $N\subset W$ as desired.
     \end{proof}
@@ -561,6 +565,49 @@
         \textup{ker }\alpha \subset \bigcup_{N\in\nor} N \subset \bigcup_{\substack{U \text{ open} \\ \text{nbhd. of } e}} U = \{e\}
         $$
         where the second inclusion follows from Lemma \ref{lem:ons} and the equality is an implication of $G$ being totally disconnected. (Suppose the intersection of all open neighborhoods of identity includes an element $x\neq e$. Then $\{e,x\}$ would be a connected subspace of $G$ that contains $e$.) Therefore, $\textup{ker }\alpha=\{e\}$ and $\alpha$ is injective as desired.
+    \end{proof}
+
+    \section{Subgroups of Profinite Groups}
+
+    \begin{thm}
+        Let $G$ be a profinite group and $H$ an open subgroup of $G$. Then $G/H$ is finite.  
+    \end{thm}
+
+    \begin{proof}
+        Let $H$ be open. Then $G/H$ with the discrete topology allows the canonical projection map to be continuous. Therefore, $G/H$ has the discrete topology and being compact, is finite.
+    \end{proof}
+
+    \begin{rem}
+        It is claimed in \cite*[Proposition 1-18]{FANF1999} that in a profinite group subgroups of finite index are necessarily open. This claim is wrong. For a counterexample see \cite*[Proposition 7.29]{milneFT}.
+    \end{rem}
+
+    \begin{thm}
+        Let $G$ be a profinite group and $H$ a subgroup of $G$. The following are equivalent:
+        \begin{enumerate}[label=\emph{(\roman*)}]
+            \item $H$ is closed.
+            \item $H$ is profinite.
+            \item $H$ is the intersection of a family of open subgroups.
+        \end{enumerate}
+    \end{thm}
+
+    \begin{proof}
+        (i) to (ii). Suppose $H$ is closed. Then $H$ is compact, since every closed set in a compact space is compact. Moreover $H^\circ$ equals $\gcirc$ and hence $H$ is totally disconnected. Theorefore, $H$ is profinite.
+
+        (ii) to (i). If $H$ is compact, then it is closed in $G$ since $G$ is Hausdorff.
+
+        (iii) to (i). Every open subgroup of a topological group is also closed, since all its cosets are open and its complement is a union of a family of its cosets. Therefore, if $H$ is the intersection of a family of open sets it is \emph{ipso facto} the intersection of a family of closed sets and hence closed.
+
+        (i) to (iii). Let $\nor$ be the set of all normal subgroups of $G$. For any $N\in H$, the set $NH$ is a subgroup of $G$. (Note that $nhn'h'=n(hn'h^{-1})hh'$ and $(nh)^{-1}=(h^{-1}nh)h^{-1}$.) The subgroup $NH$ is moreover open since it is the union of sets of the form $Nh$ for $h\in H$ which are open. We claim
+        $$ H = \bigcap_{N\in\nor} NH $$
+        One inclusion is trivial. For the other side let $x$ be a member of the intersection. We will prove that every open neighborhood of $x$ intersects $H$ and therefore $x$ lies in the closure of $H$ which is $H$ itself. Now let $U$ be an open neighborhood of $x$. Then $Ux^{-1}$ is an open neighborhood of identity and hence, by Lemma \ref{lem:ons}, contains an open normal subgroup of $G$ which we will call $N_x$. Now $x$ is both a member of $N_xx$ (by construction) and $N_xH$ (by the assumption the $x$ in a member of the intersection). Therefore, $N_xx=N_xh$ for some $h\in H$ which implies $h\in N_xx\subset U$ as desired.
+    \end{proof}
+
+    \begin{thm}
+        Let $G$ be a profinite group and $H$ a closed subgroup of $G$. Then $G/H$ is compact and totally disconnected, and hence profinite, provided it is a group.
+    \end{thm}
+
+    \begin{proof}
+        It is evident that $G/H$ is compact. To prove that $G/H$ is totally disconnected we first need to prove that it is Hausdorff, but this follows from \cite[Proposition 1-3 and Proposition 1-4(iii)]{FANF1999}. Now to prove that $G/H$ is totally disconnected it suffices to prove that for any $x\in G/H$ such that $x\neq e$ there is a closed and open set in $G/H$ that separates $x$ from $e$. Since $G/H$ is Hausdorff there is an open set $U$ in $G/H$ that contains $e$ but does not contain $x$. Let $\rho\colon G\to G/H$ be the canonical projection and consider the open set $\rho^{-1}(U)\subset G$. According to Lemma \ref{lem:ons} there is an open subgroup $V$ of $G$ that is contained in $U$. Moreover, the subgroup $V$ is closed since its complement is the union of its nontrivial cosets which are open. Since $G$ is Hausdorff this implies that $V$ is compact. Now, $\rho(V)$ is open since $\rho$ is an open map (see \cite[Proposition 1-4(ii)]{FANF1999}) and is closed since the continuous image of a compact set is compact and compact and closed are equivalent in a Hausdorff space. Note that $e\in\rho(V)$ but $x\not\in\rho(V)\subset U$ which proves our assertion.
     \end{proof}
 
     \printbibliography
