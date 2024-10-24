@@ -238,7 +238,7 @@
     \section{Profinite Groups}
 
     \begin{dfn}
-        A topological group $G$ is called a \emph{profinite group} if there is a projective system $\langle G_I,\varphi_{IJ}\rangle$ such that $G$ is the projective limit of this projective system in the category $\catname{TopGrp}$. The topology on $G$ is called the \emph{profinite topology}.
+        A topological group $G$ is called a \emph{profinite group} if there is a projective system $\langle G_I,\varphi_{IJ}\rangle$ of finite groups $G_I$ such that $G$ is the projective limit of this projective system in the category $\catname{TopGrp}$. The topology on $G$ is called the \emph{profinite topology}.
     \end{dfn}
 
     The following sections introduce some examples of pro-finite groups.
@@ -516,13 +516,13 @@
 
         \noindent\emph{Step 1. There is a compact, open neighborhood of identity $W\subset U$.}
 
-        First, note that $G$ is Hausdorff since for any two points $x\neq y$ there should be open sets seperating them or otherwise $\{x,y\}$ would be connected and for topological groups satisfying $T_1$ is equivalent to being Hausdorff (\cite[Proposition 1-3]{FANF1999}). From this it follows that $G-U$ is compact, since in a Hausdorff space closed sets are compact.
+        First, note that $G$ is Hausdorff since for any two points $x\neq y$ there should be open sets seperating them or otherwise $\{x,y\}$ would be connected and for topological groups satisfying $T_1$ is equivalent to being Hausdorff (\cite[Proposition 1-3]{FANF1999}). From this it follows that $G-U$ is compact, since in a compact space closed sets are compact.
 
         Now, let $Y$ be the intersection of all compact open neighborhoods of identity. The set $Y$ is connected according to \cite[Lemma 1-16]{FANF1999}. Therefore, $Y=\{e\}$. This implies that the complements of compact neighborhoods of identity cover $G-U$. Since $G-U$ is compact it follows from this that there are compact, open neighborhoods $K_1,\cdots,K_r$ of identity whose complements cover $G-U$. Let
         $$
         W=\bigcap_{i=1}^r K_i
         $$
-        The set $W$ is an intersection of closed sets and is hence closed. Since $G$ is Hausdorff, $W$ must also be compact. Moreover, $W$ is a finite intersection of open sets and is therefore open. This completes Step 1.
+        The set $W$ is an intersection of closed sets and is hence closed. Since $G$ is compact, $W$ must also be compact. Moreover, $W$ is a finite intersection of open sets and is therefore open. This completes Step 1.
         
         \noindent\emph{Step 2. There is a symmetric, open neighborhood of identity $V$ such that $WV\subset W$.}
 
@@ -607,7 +607,7 @@
     \end{thm}
 
     \begin{proof}
-        It is evident that $G/H$ is compact. To prove that $G/H$ is totally disconnected we first need to prove that it is Hausdorff, but this follows from \cite[Proposition 1-3 and Proposition 1-4(iii)]{FANF1999}. Now to prove that $G/H$ is totally disconnected it suffices to prove that for any $x\in G/H$ such that $x\neq e$ there is a closed and open set in $G/H$ that separates $x$ from $e$. Since $G/H$ is Hausdorff there is an open set $U$ in $G/H$ that contains $e$ but does not contain $x$. Let $\rho\colon G\to G/H$ be the canonical projection and consider the open set $\rho^{-1}(U)\subset G$. According to Lemma \ref{lem:ons} there is an open subgroup $V$ of $G$ that is contained in $U$. Moreover, the subgroup $V$ is closed since its complement is the union of its nontrivial cosets which are open. Since $G$ is Hausdorff this implies that $V$ is compact. Now, $\rho(V)$ is open since $\rho$ is an open map (see \cite[Proposition 1-4(ii)]{FANF1999}) and is closed since the continuous image of a compact set is compact and compact and closed are equivalent in a Hausdorff space. Note that $e\in\rho(V)$ but $x\not\in\rho(V)\subset U$ which proves our assertion.
+        It is evident that $G/H$ is compact. To prove that $G/H$ is totally disconnected we first need to prove that it is Hausdorff, but this follows from \cite[Proposition 1-3 and Proposition 1-4(iii)]{FANF1999}. Now to prove that $G/H$ is totally disconnected it suffices to prove that for any $x\in G/H$ such that $x\neq e$ there is a closed and open set in $G/H$ that separates $x$ from $e$. Since $G/H$ is Hausdorff there is an open set $U$ in $G/H$ that contains $e$ but does not contain $x$. Let $\rho\colon G\to G/H$ be the canonical projection and consider the open set $\rho^{-1}(U)\subset G$. According to Lemma \ref{lem:ons} there is an open subgroup $V$ of $G$ that is contained in $U$. Moreover, the subgroup $V$ is closed since its complement is the union of its nontrivial cosets which are open. Since $G$ is compact this implies that $V$ is compact. Now, $\rho(V)$ is open since $\rho$ is an open map (see \cite[Proposition 1-4(ii)]{FANF1999}) and is closed since the continuous image of a compact set is compact and compact sets are closed in a Hausdorff space. Note that $e\in\rho(V)$ but $x\not\in\rho(V)\subset U$ which proves our assertion.
     \end{proof}
 
     \printbibliography
