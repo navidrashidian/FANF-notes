@@ -1,0 +1,134 @@
+\documentclass[12pt]{article}
+
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+
+\usepackage[backend=bibtex, style=numeric, citestyle=numeric-comp]{biblatex}
+
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+
+\usepackage{tikz-cd}
+
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{corollary}[thm]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{dfn}[thm]{Definition}
+\newtheorem{exm}[thm]{Example}
+
+\theoremstyle{remark}
+\newtheorem{rem}[thm]{Remark}
+\newtheorem{notation}[thm]{Notation}
+
+\newcommand{\catvar}[1]{\mathcal{#1}}
+\newcommand{\CC}{\catvar{C}}
+\newcommand{\DD}{\catvar{D}}
+\newcommand{\PP}{\catvar{P}}
+\newcommand{\II}{\catvar{I}}
+\newcommand{\JJ}{\catvar{J}}
+
+\newcommand{\Comp}{\mathbb{C}}
+\newcommand{\Real}{\mathbb{R}}
+
+\newcommand{\catname}[1]{\textup{\sffamily\textbf{#1}}}
+\newcommand*{\Set}{\catname{Set}}
+\newcommand*{\Grp}{\catname{Grp}}
+\newcommand*{\Top}{\catname{Top}}
+\newcommand*{\TopGrp}{\catname{TopGrp}}
+
+\newcommand{\zee}{\mathbb{Z}}
+\newcommand{\zeehat}{\hat{\mathbb{Z}}}
+
+\newcommand*{\nor}{\mathcal{N}}
+
+\newcommand{\Obj}[1]{\textup{Obj}(#1)}
+\newcommand{\Mor}[1]{\textup{Mor}(#1)}
+\newcommand{\Hom}[2]{\textup{Hom}(#1,#2)}
+\newcommand{\End}[1]{\textup{End}(#1)}
+
+\newcommand{\gcirc}{G^\circ}
+
+\addbibresource{profinite-groups.bib}
+
+\title{Unitary Representations}
+\author{Navid Rashidian}
+\date{}
+
+\begin{document}
+
+    \maketitle
+
+    \section{Recap}
+
+    \begin{dfn}
+        A normed real (complex) vector space which is complete with respect to the norm metric is called a \emph{real (complex) Banach space}.
+    \end{dfn}
+
+    \begin{dfn}
+        Let $A,B$ be Banach spaces defined over the same field. A linear transformation $T\colon A\to B$ is a \emph{bounded operator} if there is constant $c\in\Real$ such that for every $v\in A$ we have $\|T(v)\|\leq c\|v\|$.
+    \end{dfn}
+
+    \begin{prop}
+        A linear transformation between two Banach spaces is bounded if and only if it is continuous.
+    \end{prop}
+
+    \begin{notation}
+        The set of all bounded operators $T\colon A\to B$ between two Banach spaces is denoted by $\Hom{A}{B}$. In the particular case in which $A=B$, we have $\End{A}=\Hom{A}{A}$.
+    \end{notation}
+
+    \begin{dfn}
+        Let $H$ be a complex vector space. A function $\langle\ |\ \rangle\colon H\times H\to\Comp$ is \emph{positive definite Hermitian form} if it satifies the following conditions:
+        \begin{enumerate}
+            \item Positive definiteness: $\langle u|r\rangle$ is a non-negative integer for every $u\in H$ and is equal to zero if and only if $u$ equals zero.
+            \item Conjugate symmetry: For every $u,v\in H$, $\langle u|v\rangle = \overline{\langle v|u \rangle}$.
+            \item Linearity in the first variable: For every $\lambda,\mu\in\Comp$ and $u,v,w\in H$, $\langle\lambda u+\mu v|w\rangle=\lambda\langle u|w\rangle+\mu\langle u|v\rangle$.
+        \end{enumerate}
+    \end{dfn}
+    
+    \begin{prop}
+        Let $H$ be a complex vector space and $\langle\ |\ \rangle$ a positive definite Hermitian form. Then the function $\|v\|=\sqrt{\langle v|v \rangle}$ defines a norm on $H$.
+    \end{prop}
+
+    \begin{dfn}
+        A complex vector space $H$ together with a positive definite Hermitian form is called a \emph{pre-Hilbert space}. If $H$ is complete with respect to the metric associated with the norm defined by the Hermitian form, it is called a \emph{Hilbert space}.
+    \end{dfn}
+
+    \begin{rem}
+        A Hilbert space is a complex Banach space and therefore a topological vector space.
+    \end{rem}
+
+    \begin{prop}
+        Let $H$ be a Hilbert space. For every $T\in\End{A}$ there is a $T^*\in\End{H}$ called the \emph{adjoint of $T$} such that
+        $$
+        \langle Tv|u \rangle = \langle v|T^*u \rangle
+        $$
+        for every $u,v\in H$.
+    \end{prop}
+
+    \section{Unitary Representations}
+
+    \begin{prop}
+        Let $H$ be a pre-Hilbert space and $\hat{H}$ its completion. Then the Hermitian form on $H$ can be extended to $\hat{H}$ and $\hat{H}$ will be complete with respect to the metric associated to the Hermitian form.
+    \end{prop}
+
+    \begin{prop}
+        Let $T\in\End{H}$. There is a unique $\hat T\in\End{\hat H}$ such that $\hat T|_H = T$.
+    \end{prop}
+
+    \begin{corollary}
+        Let $H$ be a pre-Hilbert space and $T\in\End{H}$. There is a $T^*\in\End{H}$ such that
+        $$
+        \langle Tv|u \rangle = \langle v|T^*u \rangle
+        $$
+        for every $u,v\in H$.
+    \end{corollary}
+
+    \begin{dfn}
+        
+    \end{dfn}
+
+    \printbibliography
+
+\end{document} 
