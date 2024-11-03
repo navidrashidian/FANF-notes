@@ -62,6 +62,8 @@
 
     \section{Recap}
 
+    \subsection{Hilbert Spaces}
+
     \begin{dfn}
         A normed real (complex) vector space which is complete with respect to the norm metric is called a \emph{real (complex) Banach space}.
     \end{dfn}
@@ -73,6 +75,10 @@
     \begin{prop}
         A linear transformation between two Banach spaces is bounded if and only if it is continuous.
     \end{prop}
+
+    \begin{proof}
+        See \cite[Ch. II, Prop. 1.1]{Conway1985}
+    \end{proof}
 
     \begin{notation}
         The set of all bounded operators $T\colon A\to B$ between two Banach spaces is denoted by $\Hom{A}{B}$. In the particular case in which $A=B$, we have $\End{A}=\Hom{A}{A}$.
@@ -106,6 +112,26 @@
         $$
         for every $u,v\in H$.
     \end{prop}
+
+    \subsection{Group Representations}
+
+    \begin{dfn}
+        Let $G$ be a group and $V$ a complex vector space. Let $\textup{Aut}(V)$ denote the group of isomorphisms of $V$ onto itself. A homomorphism $\rho\colon G\to\textup{GL}(V)$ is called \emph{an abstract representation of $G$ in $V$}.
+    \end{dfn}
+
+    \begin{dfn}
+        Let $G$ be a group, $V,V'$ vector spaces and $\rho,\rho'$ representations of $G$ in, respectively, $V$ and $V'$. The representations $\rho$ and $\rho'$ are called \emph{equivalent} if there is an isomorphism $T\colon V \to V'$ such that
+        $ T\rho_g=\rho'_gT $
+        for every $g \in G$.
+    \end{dfn}
+
+    \begin{dfn}
+        A field $k$ subject to a certain topology is called a \emph{topological field} if both addition and multiplication are continuous with respect to the product topology on $k\times k$. A vector space $V$ subject to a certain topology over a topological field is called a \emph{topological vector space} if its underlying group is a topological group and scalar multiplication is continuous with respect to the product topology on $k \times V$
+    \end{dfn}
+
+    \begin{dfn}
+        Let $G$ be a locally compact topological group and $V$ a locally convex topological vector space over the complex numbers. An abstract representation $\rho\colon G\to\textup{Aut}(V)$ is called a \emph{topological representation} if the map $(g,x)\mapsto\rho_g(x)$ is continuous with respect to the product topology on $G\times V$.
+    \end{dfn}
 
     \section{Unitary Representations}
 
@@ -141,15 +167,15 @@
     \begin{dfn}
         Let $H$ be a pre-Hilbert space. A bounded linear operator $T\in\End{H}$ is called \emph{pre-unitary} if we have
         $\langle x|y \rangle = \langle T(x)|T(y) \rangle$
-        for every $x,y\in H$.
+        for every $x,y\in H$. For Hilbert spaces $H$ and $H'$ an isomorphism $T\colon H\to H'$ is called \emph{pre-unitary} if the same condition holds for every $x,y\in H$.
     \end{dfn}
 
     \begin{prop}
-        A bounded linear operator $T\in\End{H}$ is pre-unitary if and only if $T^*T=\text{id}_H$.
+        A bounded linear operator $T\in\End{H}$ is pre-unitary if and only if $T^*T=\textup{id}_H$.
     \end{prop}
 
     \begin{proof}
-        Assume $T^*T=1_H$. Then $\langle Tx|Ty \rangle = \langle x |T^*Ty \rangle = \langle x|y \rangle$. For the other side, let $A=T^*T-\text{id}_H$. Obviously, for every $x\in H$ we have
+        Assume $T^*T=1_H$. Then $\langle Tx|Ty \rangle = \langle x |T^*Ty \rangle = \langle x|y \rangle$. For the other side, let $A=T^*T-\textup{id}_H$. Obviously, for every $x\in H$ we have
         $$
         \langle x | Ax \rangle = \langle x | T^*Tx - x \rangle = \langle x | T^*Tx \rangle - \langle x | x \rangle = 0
         $$
