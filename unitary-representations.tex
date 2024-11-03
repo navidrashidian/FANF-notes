@@ -109,9 +109,22 @@
 
     \section{Unitary Representations}
 
+    % TODO
     \begin{prop}
-        Let $H$ be a pre-Hilbert space and $\hat{H}$ its completion. Then the Hermitian form on $H$ can be extended to $\hat{H}$ and $\hat{H}$ will be complete with respect to the metric associated to the Hermitian form.
+        The Hermitian form on a pre-Hilbert space is a continuous linear functional.
     \end{prop}
+
+    \begin{prop}
+        Let $H$ be a pre-Hilbert space and $\hat H$ its completion. Also, let $\lambda\colon H\to\mathbb{C}$ be a continuous linear functional. Then $\lambda$ extends uniquely to $\hat H$.
+    \end{prop}
+
+    \begin{proof}
+        Let $\hat \lambda((x_i)_{i\in\mathbb{N}})=\lim_{n\to\infty}\lambda(x_i)$. Since $\lambda$ is continuous, this is well-defined. Its uniqueness also follows from the fact that we suppose $\hat \lambda$ to be continuous. It is routine to check that $\hat \lambda$ respects addition and multiplication by scalars.
+    \end{proof}
+
+    \begin{corollary}
+        Let $H$ be a pre-Hilbert space and $\hat{H}$ its completion. Then the Hermitian form on $H$ can be extended to $\hat{H}$ and $\hat{H}$ will be complete with respect to the metric associated to the Hermitian form.
+    \end{corollary}
 
     \begin{prop}
         Let $T\in\End{H}$. There is a unique $\hat T\in\End{\hat H}$ such that $\hat T|_H = T$.
@@ -126,8 +139,36 @@
     \end{corollary}
 
     \begin{dfn}
-        
+        Let $H$ be a pre-Hilbert space. A bounded linear operator $T\in\End{H}$ is called \emph{pre-unitary} if we have
+        $\langle x|y \rangle = \langle T(x)|T(y) \rangle$
+        for every $x,y\in H$.
     \end{dfn}
+
+    \begin{prop}
+        A bounded linear operator $T\in\End{H}$ is pre-unitary if and only if $T^*T=\text{id}_H$.
+    \end{prop}
+
+    \begin{proof}
+        Assume $T^*T=1_H$. Then $\langle Tx|Ty \rangle = \langle x |T^*Ty \rangle = \langle x|y \rangle$. For the other side, let $A=T^*T-\text{id}_H$. Obviously, for every $x\in H$ we have
+        $$
+        \langle x | Ax \rangle = \langle x | T^*Tx - x \rangle = \langle x | T^*Tx \rangle - \langle x | x \rangle = 0
+        $$
+        We now proceed to prove that any linear transformation $A$ with the property that for every $x\in H$ we have $\langle x | Ax \rangle$ is identically zero. For this let $x,y\in H$ and note that
+        \begin{align*}
+            \langle x+y | A(x+y) \rangle &= \langle x | Ax \rangle + \langle x | Ay \rangle + \langle y | Ax \rangle + \langle y | Ay \rangle \\
+            &= \langle x | Ay \rangle + \langle y | Ax \rangle \\
+            &= 0
+        \end{align*}
+        and
+        \begin{align*}
+            \langle x + iy | A(x + iy) \rangle &= \langle x + iy | Ax + iAy \rangle \\
+            &= \langle x | Ax \rangle + i \langle x | Ay \rangle - i \langle y | Ax \rangle + \langle y | Ay \rangle \\
+            &= i (\langle x | Ay \rangle - \langle y | Ax \rangle) \\
+            &= 0
+        \end{align*}
+        which imply $\langle x|Ay \rangle = 0$ for every $x,y\in H$. In particular $\langle Ax|Ax \rangle = 0$ which implies $Ax = 0$.
+        
+    \end{proof}
 
     \printbibliography
 
